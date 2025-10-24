@@ -1,0 +1,15 @@
+.home-page-banner {
+  position: relative;
+  height: auto;
+  min-height: 100px;
+  background-color: #c7c7c7;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  #banner-img {
+    position: relative;
+    width: 100%;
+    height: auto;
+  }
+}

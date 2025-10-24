@@ -1,0 +1,360 @@
+:root {
+    /* Màu nền */
+    --bg-primary: #ffffff;
+    /* Nền chính (trắng) */
+    --bg-secondary: #f8f9fa;
+    /* Nền phụ (xám nhạt) */
+    --bg-dark: #212529;
+    /* Nền tối */
+
+    /* Màu chữ */
+    --text-primary: #212529;
+    /* Chữ chính (đen) */
+    --text-secondary: #6c757d;
+    /* Chữ phụ (xám) */
+    --text-light: #ffffff;
+    /* Chữ sáng */
+
+    /* Màu chủ đạo */
+    --primary: #007bff;
+    /* Màu chính (xanh dương) */
+    --secondary: #6c757d;
+    /* Màu phụ (xám) */
+    --success: #28a745;
+    /* Màu thành công (xanh lá) */
+    --danger: #dc3545;
+    /* Màu lỗi (đỏ) */
+    --warning: #ffc107;
+    /* Màu cảnh báo (vàng) */
+    --info: #17a2b8;
+    /* Màu thông tin (xanh dương nhạt) */
+    --light: #f8f9fa;
+    /* Màu sáng */
+    --dark: #343a40;
+    /* Màu tối */
+
+    /* Màu viền */
+    --border-light: #dee2e6;
+    /* Viền sáng */
+    --border-dark: #495057;
+    /* Viền tối */
+
+    /* Màu hover */
+    --hover-primary: #0056b3;
+    /* Hover xanh dương */
+    --hover-danger: #bd2130;
+    /* Hover đỏ */
+    --hover-success: #1e7e34;
+    /* Hover xanh lá */
+
+    /* Màu cơ bản */
+    --red: #ff0000;
+    --green: #008000;
+    --blue: #0000ff;
+    --yellow: #ffff00;
+    --orange: #ffa500;
+    --purple: #800080;
+    --pink: #ff69b4;
+    --cyan: #00ffff;
+    --teal: #008080;
+    --brown: #8b4513;
+    --gray: #808080;
+
+    /* Màu alpha 20% */
+    --red-alpha-20: rgba(255, 0, 0, 0.2);
+    --green-alpha-20: rgba(0, 128, 0, 0.2);
+    --blue-alpha-20: rgba(0, 0, 255, 0.2);
+    --yellow-alpha-20: rgba(255, 255, 0, 0.2);
+    --orange-alpha-20: rgba(255, 165, 0, 0.2);
+    --purple-alpha-20: rgba(128, 0, 128, 0.2);
+    --pink-alpha-20: rgba(255, 105, 180, 0.2);
+    --cyan-alpha-20: rgba(0, 255, 255, 0.2);
+    --teal-alpha-20: rgba(0, 128, 128, 0.2);
+    --brown-alpha-20: rgba(139, 69, 19, 0.2);
+    --gray-alpha-20: rgba(128, 128, 128, 0.2);
+
+    /* Màu alpha 40% */
+    --red-alpha-40: rgba(255, 0, 0, 0.4);
+    --green-alpha-40: rgba(0, 128, 0, 0.4);
+    --blue-alpha-40: rgba(0, 0, 255, 0.4);
+    --yellow-alpha-40: rgba(255, 255, 0, 0.4);
+    --orange-alpha-40: rgba(255, 165, 0, 0.4);
+    --purple-alpha-40: rgba(128, 0, 128, 0.4);
+    --pink-alpha-40: rgba(255, 105, 180, 0.4);
+    --cyan-alpha-40: rgba(0, 255, 255, 0.4);
+    --teal-alpha-40: rgba(0, 128, 128, 0.4);
+    --brown-alpha-40: rgba(139, 69, 19, 0.4);
+    --gray-alpha-40: rgba(128, 128, 128, 0.4);
+
+    --bg-light: #F8F9FA;
+    --bg-dark: #121212;
+    --text-light: #212529;
+    --text-dark: #E0E0E0;
+
+    /* Độ trong suốt cho light mode */
+    --light-5: rgba(248, 249, 250, 0.05);
+    --light-10: rgba(248, 249, 250, 0.10);
+    --light-30: rgba(248, 249, 250, 0.30);
+    --light-60: rgba(248, 249, 250, 0.60);
+    --light-100: rgba(248, 249, 250, 1.00);
+
+    /* Độ trong suốt cho dark mode */
+    --dark-5: rgba(18, 18, 18, 0.05);
+    --dark-10: rgba(18, 18, 18, 0.10);
+    --dark-30: rgba(18, 18, 18, 0.30);
+    --dark-60: rgba(18, 18, 18, 0.60);
+    --dark-100: rgba(18, 18, 18, 1.00);
+
+    /* Màu bóng (Shadow) */
+    --shadow-light: rgba(0, 0, 0, 0.1);
+    --shadow-dark: rgba(0, 0, 0, 0.3);
+}
+
+/* --------------InputSerch-------------- */
+
+.InputSearch-container {
+    position: relative !important;
+    width: 100%;
+    height: auto;
+    all: unset;
+}
+
+.InputSearch-container .InputSearch-input {
+    position: relative;
+    width: 100%;
+    height: 2rem;
+    border: 1px solid var(--dark-30);
+    border-radius:
+        .1875rem .1875rem .1875rem .1875rem / .375rem .375rem .375rem .375rem;
+}
+
+.InputSearch-container .InputSearch-input input {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border: none;
+    outline: none;
+    border-radius:
+        .1875rem .1875rem .1875rem .1875rem / .375rem .375rem .375rem .375rem;
+    padding: .625rem 2rem .625rem .625rem;
+    background: transparent;
+}
+
+.InputSearch-container .InputSearch-input span {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 2rem;
+    height: 2rem;
+    padding: .5rem;
+    aspect-ratio: 1/1;
+    text-align: center;
+    cursor: pointer;
+    color: var(--text-primary);
+    z-index: 1;
+    transition: all ease-in .3s;
+}
+
+.InputSearch-container .InputSearch-list {
+    position: absolute;
+    width: 100%;
+    height: 10rem;
+    margin-top: 1.5rem;
+    padding: .625rem;
+    border: .0625rem solid var(--dark-30);
+    border-radius: .1875rem .1875rem .1875rem .1875rem / .375rem .375rem .375rem .375rem;
+    background: var(--bg-secondary);
+    z-index: 9999999;
+    opacity: 0;
+    visibility: hidden;
+    transition: all .2s ease-in-out;
+    overflow: auto;
+}
+
+.InputSearch-container .InputSearch-list::before {
+    content: '';
+    position: absolute;
+    top: -.7rem;
+    right: .25rem;
+    width: 1.5rem;
+    height: .7em;
+    background: #b2b3b4;
+    clip-path: polygon(0% 100%, 1% 99.9%, 2% 99.6%, 3% 99.1%, 4% 98.4%,
+            5% 97.5%, 6% 96.4%, 7% 95.1%, 8% 93.6%, 9% 91.9%,
+            10% 90%, 47% 2%, 48% 1.4%, 49% 0.6%, 50% 0.2%,
+            51% 0.6%, 52% 1.4%, 53% 2%, 90% 90%, 91% 91.9%,
+            92% 93.6%, 93% 95.1%, 94% 96.4%, 95% 97.5%, 96% 98.4%,
+            97% 99.1%, 98% 99.6%, 99% 99.9%, 100% 100%);
+    z-index: 10;
+}
+
+.InputSearch-container .InputSearch-list ul {
+    position: relative;
+    list-style: none;
+    width: 100%;
+    display: flex;
+    justify-content: start;
+    align-items: start;
+    flex-direction: column;
+    gap: .625rem;
+}
+
+.InputSearch-container .InputSearch-list ul .InputSearch-list-child {
+    position: relative;
+    width: 100%;
+    border: 1px solid var(--dark-30);
+    border-radius: .1875rem;
+    padding: .1875rem .625rem;
+    background: transparent;
+    cursor: pointer;
+    transition: all .1s ease;
+}
+
+.InputSearch-container .InputSearch-list ul .InputSearch-list-child::before {
+    content: '';
+}
+
+.InputSearch-container .InputSearch-list ul .InputSearch-list-child::after {
+    content: '';
+}
+
+.InputSearch-container .InputSearch-list ul .InputSearch-list-child:hover {
+    background: var(--bg-light);
+    border: 1px solid var(--dark-60);
+    box-shadow: 1px 1px 1px var(--dark-5),
+        3px 3px 3px var(--dark-5),
+        5px 5px 5px var(--dark-5),
+        -1px -1px 1px var(--light-10),
+        -3px -3px 3px var(--light-10),
+        -5px -5px 5px var(--light-10),
+        inset -1px -1px 2px var(--dark-5),
+        inset 1px 1px 2px var(--light-100);
+}
+
+.InputSearch-container .InputSearch-input input:focus+span {
+    animation: animate-show .7s ease-out forwards;
+}
+
+@keyframes animate-show {
+    0% {
+        top: -5%;
+    }
+
+    25% {
+        top: 5%;
+    }
+
+    100% {
+        top: 0%
+    }
+}
+
+.InputSearch-container:focus-within .InputSearch-list {
+    opacity: 1;
+    visibility: visible;
+    animation: animate-show-list .4s ease-out forwards;
+}
+
+@keyframes animate-show-list {
+    from {
+        padding: 0;
+        height: 0;
+        min-height: 0;
+    }
+
+    to {
+        min-height: 10rem;
+    }
+}
+
+/* --------------SwitchButton-------------- */
+
+.SwitchButton-container {
+    position: relative;
+    width: auto;
+    height: auto;
+}
+
+.SwitchButton-container .SwitchButton-box {
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 2.5rem;
+    height: 1.25rem;
+}
+
+.SwitchButton-container #SwitchButton-lable {
+    position: relative;
+    display: inline-block;
+    width: 2.5rem;
+    /* Tăng chiều rộng */
+    height: 1.25rem;
+    /* Tăng chiều cao */
+    border: 1px solid #ccc;
+    border-radius: 1rem;
+    /* Bo tròn giống switch */
+    background: #ddd;
+    cursor: pointer;
+    transition: all 0.1s ease-in;
+    overflow: hidden;
+}
+
+.SwitchButton-container #SwitchButton-lable::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 0.075rem;
+    width: 1rem;
+    height: 1rem;
+    background: white;
+    border-radius: 50%;
+    transform: translateY(-50%);
+    transition: left 0.2s ease-in;
+}
+
+/* Khi input checkbox được check, di chuyển nút */
+.SwitchButton-container input:checked+#SwitchButton-lable {
+    background: #4CAF50;
+}
+
+.SwitchButton-container input:checked+#SwitchButton-lable::before {
+    left: 1.3rem;
+}
+
+
+/* --------------InputChange-------------- */
+
+.InputChange-container {
+    position: relative;
+    width: 100%;
+    height: auto;
+    font-size: 1rem;
+    /* border: 1px solid; */
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.InputChange-container .InputChange-box {
+    position: relative;
+    width: 100%;
+    min-height: 2rem;
+}
+
+.InputChange-container input {
+    position: relative;
+    width: 100%;
+    height: 1rem;
+    border: none;
+    outline: none;
+    border-bottom: 1px solid var(--dark);
+    padding: 1rem .375rem;
+    font-size: 1em;
+}
+
+.InputChange-container .InputChange-box div {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    padding: .45rem .375rem;
+    font-size: 1em;
+    cursor: text;
+}

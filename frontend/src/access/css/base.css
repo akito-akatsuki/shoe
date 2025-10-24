@@ -1,0 +1,137 @@
+:root {
+  --bg-light: #f8f9fa;
+  --bg-dark: #121212;
+  --bg-color: #121212;
+  --text-light: #212529;
+  --text-dark: #e0e0e0;
+  --primary-light: #007bff;
+  --primary-dark: #1e90ff;
+  --header-bg: #121212aa;
+
+  --border-dark: #313131;
+  --border-light: #e0e0e0;
+
+  /* Độ trong suốt cho light mode */
+  --light-5: rgba(248, 249, 250, 0.05);
+  --light-10: rgba(248, 249, 250, 0.1);
+  --light-30: rgba(248, 249, 250, 0.3);
+  --light-60: rgba(248, 249, 250, 0.6);
+  --light-100: rgba(248, 249, 250, 1);
+
+  /* Độ trong suốt cho dark mode */
+  --dark-5: rgba(18, 18, 18, 0.05);
+  --dark-10: rgba(18, 18, 18, 0.1);
+  --dark-30: rgba(18, 18, 18, 0.3);
+  --dark-60: rgba(18, 18, 18, 0.6);
+  --dark-100: rgba(18, 18, 18, 1);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  /* color-scheme: dark; */
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.4) transparent;
+}
+
+body {
+  position: relative;
+  width: 100%;
+  height: 100dvh;
+  background: light-dark(var(--bg-light), var(--bg-dark));
+}
+
+.page-container {
+  position: relative;
+  top: calc(4rem);
+  width: 100%;
+  /* min-width: 700px; */
+  height: calc(100dvh - 4rem);
+}
+
+button {
+  position: relative;
+  color: light-dark(var(--text-color-light), var(--text-color-dark));
+  border-radius: 0.1875rem;
+  border: none;
+  border: 1px solid;
+  cursor: pointer;
+}
+
+button svg {
+  fill: light-dark(var(--text-color-light), var(--text-color-dark));
+}
+
+/* -------------table------------- */
+
+#box_table_container {
+  position: relative;
+  width: 100%;
+  box-shadow: 0 0 8px 2px #3333;
+  border-radius: 0.1875rem;
+}
+
+#box_table_container h2 {
+  position: relative;
+  width: 100%;
+  text-align: center;
+  margin: 0.625rem 0;
+  padding: 1rem 0;
+}
+
+#box_table_container table {
+  position: relative;
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 1rem;
+}
+
+#box_table_container thead {
+  position: sticky;
+  top: 4rem;
+  z-index: 1;
+}
+
+#box_table_container thead tr {
+  background-color: #94d3dc;
+  color: #111;
+  text-align: left;
+  font-weight: bold;
+  font-family: Roboto_both;
+  white-space: nowrap;
+}
+
+#box_table_container tbody tr {
+  border-bottom: 1px solid #2224;
+  font-family: Roboto;
+}
+
+#box_table_container tr .center {
+  text-align: center;
+}
+
+#box_table_container tr .lect {
+  text-align: left;
+}
+
+#box_table_container :is(th, td) {
+  padding: 0.8rem 1rem;
+}
+
+#box_table_container tbody tr:nth-of-type(even) {
+  background-color: #f8f8f8;
+}
+
+#box_table_container tbody tr:last-of-type {
+  border-bottom: 4px solid #94d3dc;
+}
+
+#box_table_container tbody .inputAdd {
+  position: relative;
+  width: 100%;
+  padding: 0.375rem 0.1875rem;
+  outline: none;
+  border: none;
+  border-bottom: 1px solid;
+}

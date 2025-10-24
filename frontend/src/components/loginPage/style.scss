@@ -1,0 +1,42 @@
+.login-container {
+  position: fixed;
+  inset: 0;
+  z-index: 9999999;
+
+  .login-overlay {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    backdrop-filter: blur(2px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .login-box {
+      position: relative;
+      width: 240px;
+      padding: 0.625rem .625rem 1rem .625rem;
+      border: 1px solid var(--light-10);
+      border-radius: 0.625rem;
+      background: var(--bg-dark);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+
+      .title {
+        position: relative;
+        user-select: none;
+        font-family: K2D;
+        font-size: 1.25rem;
+      }
+
+      hr {
+        border: none;
+        border-top: 1px solid #e5e7eb;
+        width: 100%;
+      }
+    }
+  }
+}
