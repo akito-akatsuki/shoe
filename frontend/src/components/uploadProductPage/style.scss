@@ -1,0 +1,113 @@
+// 🎨 Giao diện tổng thể
+.product-manager {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 2rem;
+
+  h1 {
+    text-align: center;
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 2rem;
+  }
+
+  // 🧩 Khối chung
+  .block {
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+
+    h2 {
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      color: #333;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+
+      input,
+      textarea,
+      select {
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        padding: 0.6rem 0.8rem;
+        font-size: 1rem;
+        transition: border-color 0.2s;
+
+        &:focus {
+          border-color: #007bff;
+          outline: none;
+        }
+      }
+
+      textarea {
+        resize: vertical;
+        min-height: 80px;
+      }
+
+      button {
+        background: linear-gradient(135deg, #007bff, #0056d8);
+        color: white;
+        border: none;
+        border-radius: 8px;
+        padding: 0.7rem 1.2rem;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: 0.2s ease-in-out;
+
+        &:hover {
+          background: linear-gradient(135deg, #0056d8, #0040b0);
+        }
+      }
+    }
+  }
+
+  // 🖼️ Preview ảnh upload
+  .image-preview {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin-top: 0.5rem;
+
+    img {
+      width: 90px;
+      height: 90px;
+      object-fit: cover;
+      border-radius: 10px;
+      border: 1px solid #ddd;
+      transition: transform 0.2s;
+
+      &:hover {
+        transform: scale(1.05);
+      }
+    }
+  }
+
+  // 📋 Danh sách category
+  .category-list {
+    ul {
+      list-style: disc;
+      padding-left: 1.2rem;
+      color: #333;
+
+      li {
+        margin-bottom: 0.3rem;
+
+        b {
+          color: #222;
+        }
+      }
+    }
+
+    .empty {
+      color: #888;
+      font-style: italic;
+    }
+  }
+}

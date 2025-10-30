@@ -1,0 +1,112 @@
+.bill-container {
+  position: relative;
+  padding: 0.625rem;
+  font-family: roboto;
+
+  .invoice {
+    max-width: 700px;
+    background: #fff;
+    margin: 40px auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+
+    .invoice-header {
+      background: #2563eb;
+      color: white;
+      padding: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom-left-radius: 50px;
+
+      .logo {
+        font-size: 22px;
+        font-weight: 600;
+        line-height: 1.4;
+      }
+    }
+  }
+
+  .content {
+    padding: 30px;
+
+    h2 {
+      text-align: center;
+      color: #2563eb;
+      margin: 0;
+    }
+
+    .customer-info,
+    .payment-info {
+      margin-bottom: 25px;
+      line-height: 1.5rem;
+
+      h3 {
+        color: #2563eb;
+        margin-bottom: 8px;
+      }
+    }
+    .invoice-meta {
+      float: right;
+      text-align: right;
+      line-height: 1.25rem;
+      margin-bottom: 1rem;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+
+      th,
+      td {
+        text-align: left;
+        padding: 10px;
+
+        &.left {
+          text-align: left;
+        }
+        &.center {
+          text-align: center;
+        }
+        &.right {
+          text-align: right;
+        }
+      }
+
+      th {
+        border-bottom: 2px solid #2563eb;
+        color: #2563eb;
+      }
+
+      td {
+        border-bottom: 1px solid #ddd;
+      }
+    }
+  }
+
+  .total {
+    text-align: right;
+    margin-top: 20px;
+    font-size: 16px;
+    line-height: 1.5rem;
+
+    strong {
+      color: #2563eb;
+      font-size: 18px;
+    }
+  }
+
+  .footer {
+    background: #f1f5f9;
+    padding: 15px 30px;
+    font-size: 13px;
+    color: #555;
+    text-align: center;
+    border-top: 1px solid #e5e7eb;
+    .highlight {
+      color: #2563eb;
+      font-weight: bold;
+    }
+  }
+}

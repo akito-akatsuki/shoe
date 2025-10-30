@@ -7,6 +7,9 @@ import { useStore } from "./store";
 import Header from "./components/headerPage";
 import HomePage from "./components/homePage";
 import AuthPage from "./components/loginPage";
+import BillPage from "./components/billPage";
+import ProductManager from "./components/uploadProductPage"
+import ProductUpdateForm from "./components/updateProductPage"
 
 function MainContent({ loading }) {
   const location = useLocation();
@@ -24,6 +27,9 @@ function MainContent({ loading }) {
             <Switch>
               <Route exact path="/" component={HomePage} />
               <Route exact path="/auth" component={HomePage} />
+              <Route exact path="/bill" component={BillPage} />
+              <Route exact path="/product-manager" component={ProductManager} />
+              <Route exact path="/product-update" component={ProductUpdateForm} />
             </Switch>
           </div>
         </>

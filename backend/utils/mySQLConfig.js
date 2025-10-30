@@ -8,28 +8,28 @@ require("dotenv").config();
  * @type {mysql.Pool}
  */
 const pool = mysql.createPool({
-  host: process.env.DB_HOST,
-  user: process.env.DB_USER,
-  password: process.env.DB_PASSWORD,
-  database: process.env.DB_NAME,
-  waitForConnections: true,
-  connectionLimit: 50,
-  queueLimit: 0,
-  connectTimeout: 10000,
-  timezone: "+07:00",
-  enableKeepAlive: true,
-  multipleStatements: true,
+    host: process.env.DB_HOST,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_NAME,
+    waitForConnections: true,
+    connectionLimit: 50,
+    queueLimit: 0,
+    connectTimeout: 10000,
+    timezone: "+07:00",
+    enableKeepAlive: true,
+    multipleStatements: true,
 });
 
 // Test kết nối
 (async () => {
-  try {
-    const connection = await pool.getConnection();
-    console.log("✅ Đã kết nối đến MySQL:", process.env.DB_NAME);
-    connection.release();
-  } catch (err) {
-    console.error("❌ Lỗi kết nối MySQL:", err);
-  }
+    try {
+        const connection = await pool.getConnection();
+        console.log("✅ Đã kết nối đến MySQL:", process.env.DB_NAME);
+        connection.release();
+    } catch (err) {
+        console.error("❌ Lỗi kết nối MySQL:", err);
+    }
 })();
 
 /**
@@ -54,19 +54,20 @@ const pool = mysql.createPool({
  * @return {Promise<Array>} Trả về một Promise với kết quả truy vấn.
  */
 async function queryDatabase(query, params = []) {
-  try {
-    const [rows] = await pool.query(query, params);
-    return rows;
-  } catch (err) {
-    console.error("❌ Query error:", err);
-    throw err;
-  }
+    try {
+        const [rows] = await pool.query(query, params);
+        return rows;
+    } catch (err) {
+        console.error("❌ Query error:", err);
+        throw err;
+    }
 }
 
 // (async () => {
 //     const result = await queryDatabase("SELECT 1");
 //     console.log("✅ Kết quả:", result);
 // })();
+
 
 module.exports = queryDatabase;
 module.exports.pool = pool;

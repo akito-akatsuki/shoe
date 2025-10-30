@@ -10,7 +10,7 @@ const LoginButton = ({ onLogin }) => {
 
   const handleSuccess = async (response) => {
     try {
-      const res = await fetch("http://localhost:5000/auth/google", {
+      const res = await fetch(`${state.domain}/auth/google`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -18,14 +18,14 @@ const LoginButton = ({ onLogin }) => {
         body: JSON.stringify({
           credential: response.credential,
         }),
+        credentials: "include",
       });
 
-      if (!res.ok) {
-        throw new Error("Login failed");
-      }
-
+      if (!res.ok) throw new Error("Login failed");
       const data = await res.json();
+
       onLogin(data);
+      console.log("Google login successful:", data);
       dispath(actions.set_is_login(false));
       history.push("/");
     } catch (err) {

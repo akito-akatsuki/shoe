@@ -2,6 +2,7 @@ import React, { useEffect, useState, useRef } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { useStore, actions } from "../../store";
 
+import logoImg from "./assets/logo/logo.png";
 import "./style.scss";
 
 export default function Header() {
@@ -21,10 +22,67 @@ export default function Header() {
     return () => document.removeEventListener("click", handleClickOutside);
   }, []);
 
+  useEffect(() => {
+    if (state.isLogin) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+  }, [state.isLogin]);
+
+  // Logout function
+
+  useEffect(() => {
+    const refreshAccessToken = async () => {
+      try {
+        const res = await fetch(`${state.domain}/auth/refresh`, {
+          method: "POST",
+          credentials: "include", // gửi cookie refreshToken
+        });
+        if (!res.ok) return;
+        const data = await res.json();
+
+        // Lấy thông tin user
+        const userRes = await fetch(`${state.domain}/auth/me`, {
+          headers: { Authorization: `Bearer ${data.accessToken}` },
+        });
+        if (!userRes.ok) return;
+        const user = await userRes.json();
+
+        dispath(actions.set_user_info(user));
+      } catch (err) {
+        console.error("Auto login failed:", err);
+      }
+    };
+
+    refreshAccessToken();
+  }, []);
+
+  const handleLogout = async () => {
+    try {
+      await fetch(`${state.domain}/auth/logout`, {
+        method: "POST",
+        credentials: "include", // để clear cookie
+      });
+
+      dispath(actions.set_user_info({})); // clear user info
+      dispath(actions.set_is_login(false));
+      history.push("/");
+      showInfo && setShowInfo(false);
+    } catch (err) {
+      console.error("Logout error:", err);
+    }
+  };
+
   return (
     <div className="header">
       <div className="header-left">
-        <Link to="/">My App</Link>
+        <Link to="/"><img
+            src={logoImg}
+            alt="Logo"
+            className="logo-img"
+            style={{ width: "3rem", height: "3rem" }}
+          /></Link>
       </div>
       <div className="header-center">
         <input type="text" className="search-input" placeholder="Search..." />
@@ -82,7 +140,8 @@ export default function Header() {
                 </div>
                 <hr />
                 <div className="btn-actions">
-                  <button className="btn logout">log out</button>
+                  <button className="btn logout" onClick={() => handleLogout()}>
+                    log out</button>
                 </div>
               </div>
             )}

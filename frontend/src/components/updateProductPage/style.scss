@@ -1,0 +1,174 @@
+.product-update {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 1.5rem;
+
+  h2 {
+    font-size: 1.75rem;
+    font-weight: 600;
+    margin-bottom: 1.25rem;
+    color: #1d4ed8;
+    text-align: center;
+  }
+
+  .layout {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 1.5rem;
+
+    @media (max-width: 768px) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  /* ---- Danh mục và danh sách sản phẩm ---- */
+  .category-list {
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 1rem;
+    background: #fafafa;
+
+    .category {
+      margin-bottom: 1rem;
+
+      .category-name {
+        font-weight: 600;
+        color: #2563eb;
+        margin-bottom: 0.5rem;
+      }
+
+      .product-item {
+        cursor: pointer;
+        padding: 6px 8px;
+        border-radius: 4px;
+        transition: 0.2s;
+
+        &:hover {
+          background: #f3f4f6;
+        }
+
+        &.selected {
+          background: #dbeafe;
+          font-weight: 500;
+        }
+      }
+    }
+  }
+
+  /* ---- Form cập nhật ---- */
+  form {
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+    padding: 1.25rem;
+    background: #fff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+
+    .form-group {
+      margin-bottom: 1rem;
+
+      label {
+        display: block;
+        font-weight: 600;
+        margin-bottom: 0.25rem;
+        color: #374151;
+      }
+
+      input {
+        width: 100%;
+        padding: 8px 10px;
+        border: 1px solid #d1d5db;
+        border-radius: 6px;
+        transition: border-color 0.2s;
+
+        &:focus {
+          outline: none;
+          border-color: #2563eb;
+          box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.15);
+        }
+      }
+    }
+
+    /* ---- Ảnh hiện tại ---- */
+    .current-images {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 0.25rem;
+
+      img {
+        width: 96px;
+        height: 96px;
+        object-fit: cover;
+        border-radius: 6px;
+        border: 1px solid #e5e7eb;
+        transition: transform 0.2s ease;
+
+        &:hover {
+          transform: scale(1.05);
+        }
+      }
+    }
+
+    /* ---- Ảnh mới (preview) ---- */
+    .preview-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 0.5rem;
+
+      .preview-item {
+        position: relative;
+
+        img {
+          width: 96px;
+          height: 96px;
+          object-fit: cover;
+          border-radius: 6px;
+          border: 1px solid #e5e7eb;
+          transition: transform 0.2s ease;
+
+          &:hover {
+            transform: scale(1.05);
+          }
+        }
+
+        button {
+          position: absolute;
+          top: -6px;
+          right: -6px;
+          width: 20px;
+          height: 20px;
+          background: #dc2626;
+          color: white;
+          border: none;
+          border-radius: 50%;
+          font-size: 0.75rem;
+          cursor: pointer;
+          transition: 0.2s;
+
+          &:hover {
+            background: #b91c1c;
+          }
+        }
+      }
+    }
+
+    /* ---- Nút submit ---- */
+    .submit-btn {
+      display: inline-block;
+      background: #2563eb;
+      color: white;
+      font-weight: 500;
+      border: none;
+      border-radius: 6px;
+      padding: 10px 20px;
+      margin-top: 0.5rem;
+      cursor: pointer;
+      transition: 0.2s;
+
+      &:hover {
+        background: #1e40af;
+      }
+    }
+  }
+}

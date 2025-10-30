@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hóa đơn - Giày An Nam</title>
+    <style>
+      body {
+        font-family: "Segoe UI", Arial, sans-serif;
+        background: #f9f9fb;
+        margin: 0;
+        padding: 0;
+        color: #333;
+      }
+
+      .invoice {
+        max-width: 700px;
+        background: #fff;
+        margin: 40px auto;
+        border-radius: 8px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+      }
+      /*
+      .header {
+        background: #2563eb;
+        color: white;
+        padding: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border-bottom-left-radius: 50px;
+      } */
+
+      .logo {
+        font-size: 22px;
+        font-weight: 600;
+        line-height: 1.4;
+      }
+
+      .logo span {
+        display: block;
+        font-size: 14px;
+        font-weight: 400;
+      }
+
+      .title {
+        font-size: 28px;
+        font-weight: bold;
+      }
+
+      h2 {
+        text-align: center;
+        color: #2563eb;
+        margin: 0;
+      }
+
+      .content {
+        padding: 30px;
+      }
+
+      .customer-info,
+      .payment-info {
+        margin-bottom: 25px;
+      }
+
+      .customer-info h3,
+      .payment-info h3 {
+        color: #2563eb;
+        margin-bottom: 8px;
+      }
+
+      .invoice-meta {
+        float: right;
+        text-align: right;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 15px;
+      }
+
+      table th,
+      table td {
+        text-align: left;
+        padding: 10px;
+      }
+
+      table th {
+        border-bottom: 2px solid #2563eb;
+        color: #2563eb;
+      }
+
+      table td {
+        border-bottom: 1px solid #ddd;
+      }
+
+      .total {
+        text-align: right;
+        margin-top: 20px;
+        font-size: 16px;
+      }
+
+      .total strong {
+        color: #2563eb;
+        font-size: 18px;
+      }
+
+      .footer {
+        background: #f1f5f9;
+        padding: 15px 30px;
+        font-size: 13px;
+        color: #555;
+        text-align: center;
+        border-top: 1px solid #e5e7eb;
+      }
+
+      .highlight {
+        color: #2563eb;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="invoice">
+      <div class="header">
+        <div class="shop-name">
+          Giày
+          <span>trangwebhay.vn</span>
+        </div>
+        <div class="logo"></div>
+      </div>
+
+      <div class="content">
+        <h2>HÓA ĐƠN THANH TOÁN</h2>
+        <div class="customer-info">
+          <h3>Name:</h3>
+          <p>Phone:📞 +84 912 345 678</p>
+          <p>Address: 📍 Số 13 Quang Trung, Thành phố Vinh, Nghệ An</p>
+          <div class="invoice-meta">
+            <p>Hóa đơn: #12345</p>
+            <p>Ngày: 06/01/2025</p>
+          </div>
+        </div>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Mục</th>
+              <th>Số lượng</th>
+              <th>Đơn giá</th>
+              <th>Giảm giá</th>
+              <th>Thành tiền</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Sửa giày sneaker</td>
+              <td>1</td>
+              <td>2.000.000đ</td>
+              <td>2%</td>
+              <td>2.000.000đ</td>
+            </tr>
+            <tr>
+              <td>Vệ sinh giày sneaker</td>
+              <td>2</td>
+              <td>2.000.000đ</td>
+              <td>2%</td>
+              <td>4.000.000đ</td>
+            </tr>
+            <tr>
+              <td>Chống nước cho giày sneaker</td>
+              <td>1</td>
+              <td>2.000.000đ</td>
+              <td>2%</td>
+              <td>2.000.000đ</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="total">
+          <p>Tổng cộng: 8.000.000đ</p>
+          <p>Thuế (0%): 0đ</p>
+          <p><strong>Tổng tiền: 8.000.000đ</strong></p>
+        </div>
+
+        <div class="payment-info">
+          <h3>Thông tin Thanh toán</h3>
+          <p>Ngân hàng:</p>
+          <p>Tên tài khoản: Giày</p>
+          <p>Số tài khoản: 00001012456</p>
+          <p>Hạn thanh toán: 06/01/2025</p>
+        </div>
+      </div>
+
+      <div class="footer">
+        ✉️ <span class="highlight">xinchao@trangwebhay.vn</span> | 📍 123 Đường
+        ABC, Thành phố DEF | ☎️ <span class="highlight">+84 912 345 678</span>
+      </div>
+    </div>
+  </body>
+</html>

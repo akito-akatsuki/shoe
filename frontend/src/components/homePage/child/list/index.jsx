@@ -1,8 +1,11 @@
 import React from "react";
+import { useStore } from "../../../../store";
 
 import "./style.scss";
 
 export default function List({ categorize, products }) {
+  const [state] = useStore();
+
   return (
     <div className="product-list-container">
       <div className="categorize-section">{categorize}</div>
@@ -13,14 +16,13 @@ export default function List({ categorize, products }) {
               <div
                 className="product-image"
                 style={{
-                  background: `url(${encodeURI(
-                    item.img
+                  background: `url(${state.domain}${encodeURI(
+                    item.url
                   )}) center center / cover no-repeat`,
                 }}
               ></div>
-              {console.log(item.url)}
               <div className="wapper-content">
-                <div className="product-title">{item.name}</div>
+                <div className="product-title">{item.productName}</div>
                 <div className="product-price">{item.price}</div>
               </div>
             </div>

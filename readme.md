@@ -44,3 +44,8 @@ npm start
 GOOGLE_CLIENT_ID=xxxxxxxxxxxxxxx.apps.googleusercontent.com
 ```
 👉 GOOGLE_CLIENT_ID lấy từ [Google Cloud Console → Credentials](https://console.cloud.google.com/apis/credentials)
+
+## Tạo mã jwt
+```
+node -e "console.log(require('crypto').randomBytes(64).toString('hex'))"
+```
