@@ -12,7 +12,12 @@ export default function List({ categorize, products }) {
       <div className="product-list">
         {products.map((item) => (
           <div className="product-box" key={item.id}>
-            <div className="product-item">
+            <div
+              className="product-item"
+              onClick={() => {
+                window.location.href = `/product-details/${item.productId}`;
+              }}
+            >
               <div
                 className="product-image"
                 style={{

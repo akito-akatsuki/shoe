@@ -11,11 +11,99 @@ const getVNDate = require("@dateVN");
 // biến ở đây
 const router = express.Router();
 
+// Lấy chi tiết 1 sản phẩm
+router.get("/product/:id", async (req, res) => {
+  const { id } = req.params;
+  try {
+    const response = await queryDatabase(
+      "SELECT * FROM products WHERE id = ?",
+      [id]
+    );
+    if (response.length === 0) {
+      return res.status(404).json({ error: "Product not found" });
+    }
+    const product = response[0];
+    const { categoryId } = product;
+    const storageDir = path.join(__dirname, `../storages/${categoryId}/${id}`);
+
+    let images = [];
+    try {
+      if (fs.existsSync(storageDir)) {
+        images = fs
+          .readdirSync(storageDir)
+          .filter((f) => /\.(png|jpe?g|gif|webp)$/i.test(f))
+          .sort((a, b) => {
+            const na = parseInt(path.parse(a).name, 10);
+            const nb = parseInt(path.parse(b).name, 10);
+            if (!isNaN(na) && !isNaN(nb)) return na - nb;
+            return a.localeCompare(b);
+          })
+          .map((f) => `/storages/${categoryId}/${id}/${f}`);
+      }
+    } catch (e) {
+      images = [];
+    }
+
+    product.imageUrl = images;
+    res.json(response[0]);
+  } catch (error) {
+    console.error("Error fetching product details:", error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
+// Lấy danh sách sản phẩm theo category
+
+router.get("/product-list", async (req, res) => {
+  try {
+    const rows = await queryDatabase(`
+      SELECT
+        c.id AS categoryId,
+        c.categoryName,
+        p.id AS productId,
+        p.productName,
+        p.price
+      FROM category c
+      LEFT JOIN products p ON c.id = p.categoryId
+    `);
+
+    // Gom nhóm theo categoryId
+    const response = [];
+    const map = new Map();
+
+    for (const row of rows) {
+      if (!map.has(row.categoryId)) {
+        map.set(row.categoryId, {
+          categoryId: row.categoryId,
+          categoryName: row.categoryName,
+          bannerURL: `/storages/${row.categoryId}/banner/1`,
+          products: [],
+        });
+        response.push(map.get(row.categoryId));
+      }
+
+      if (row.productId) {
+        map.get(row.categoryId).products.push({
+          productId: row.productId,
+          productName: row.productName,
+          price: Number(row.price).toLocaleString("vi-VN") + "đ",
+          url: `/storages/${row.categoryId}/${row.productId}/1.jpg`,
+        });
+      }
+    }
+
+    res.json(response);
+  } catch (error) {
+    console.error("Error fetching product list:", error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
 router.get("/by-category-name/:name", async (req, res) => {
   const { name } = req.params;
   try {
     const response = await queryDatabase(
-      `SELECT p.* 
+      `SELECT p.*
        FROM products p
        JOIN category c ON p.categoryId = c.id
        WHERE c.categoryName LIKE ?`,
@@ -158,51 +246,6 @@ router.post(
     }
   }
 );
-
-router.get("/product-list", async (req, res) => {
-  try {
-    const rows = await queryDatabase(`
-      SELECT
-        c.id AS categoryId,
-        c.categoryName,
-        p.id AS productId,
-        p.productName,
-        p.price
-      FROM category c
-      LEFT JOIN products p ON c.id = p.categoryId
-    `);
-
-    // Gom nhóm theo categoryId
-    const response = [];
-    const map = new Map();
-
-    for (const row of rows) {
-      if (!map.has(row.categoryId)) {
-        map.set(row.categoryId, {
-          categoryId: row.categoryId,
-          categoryName: row.categoryName,
-          bannerURL: `/storages/${row.categoryId}/banner/1`,
-          products: [],
-        });
-        response.push(map.get(row.categoryId));
-      }
-
-      if (row.productId) {
-        map.get(row.categoryId).products.push({
-          productId: row.productId,
-          productName: row.productName,
-          price: Number(row.price).toLocaleString("vi-VN") + "đ",
-          url: `/storages/${row.categoryId}/${row.productId}/1.jpg`,
-        });
-      }
-    }
-
-    res.json(response);
-  } catch (error) {
-    console.error("Error fetching product list:", error);
-    res.status(500).json({ error: "Internal Server Error" });
-  }
-});
 
 // --------------- Cập nhật sản phẩm -----------------
 
