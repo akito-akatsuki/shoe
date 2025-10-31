@@ -35,7 +35,7 @@ app.use(
   "/storages",
   express.static(path.join(__dirname, "storages"), {
     maxAge: "1d", // cache 1 ngày
-    etag: true,   // bật ETag để client chỉ tải lại nếu file đổi
+    etag: true, // bật ETag để client chỉ tải lại nếu file đổi
     lastModified: true,
     immutable: false, // nếu bạn muốn file đổi thì reload
   })
@@ -57,11 +57,15 @@ app.use("/storages", (req, res) => {
   return res.status(404).send("File not found");
 });
 
-
 // ====================
 // SPA routes hợp lệ
 // ====================
-const spaRoutes = ["/", "/auth", "/product-manager"];
+const spaRoutes = [
+  "/",
+  "/auth",
+  "/product-manager",
+  /^\/product-details(\/.*)?$/,
+];
 
 app.get(spaRoutes, (req, res) => {
   res.sendFile(path.join(__dirname, "public", "index.html"));
