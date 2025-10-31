@@ -3,8 +3,8 @@ import * as constants from "./constants.js";
 const initState = {
   todos: [],
   userInfo: [],
-  // domain: "http://localhost:5000",
-  domain: "",
+  domain: "http://localhost:5000",
+  // domain: "",
   clientId:
     "382574203305-ud2irfgr6bl243mmq6le9l67e29ire7d.apps.googleusercontent.com",
   isLogin: false,

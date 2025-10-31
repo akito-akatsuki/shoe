@@ -1,6 +1,6 @@
 import React from "react";
 import { Route, Switch, useLocation } from "react-router-dom";
-import { LoaderPage } from "./components/base/LoaderForm.jsx";
+
 import { useStore } from "./store";
 
 // ------------ Components ---------------
@@ -12,38 +12,27 @@ import ProductManager from "./components/uploadProductPage";
 import ProductUpdateForm from "./components/updateProductPage";
 import ProductDetails from "./components/productDetailsPage";
 
-function MainContent({ loading }) {
-  const location = useLocation();
-  // const hideHeader = location.pathname === "/auth";
+function MainContent() {
   const [state, dispatch] = useStore();
 
   return (
     <>
-      {loading && <LoaderPage />}
-      {!loading && (
-        <>
-          {state.isLogin && <AuthPage />}
-          <Header />
-          <div className="page-container">
-            <Switch>
-              <Route exact path="/" component={HomePage} />
-              <Route exact path="/auth" component={HomePage} />
-              <Route exact path="/bill" component={BillPage} />
-              <Route exact path="/product-manager" component={ProductManager} />
-              <Route
-                exact
-                path="/product-update"
-                component={ProductUpdateForm}
-              />
-              <Route
-                exact
-                path="/product-details/:productId"
-                component={ProductDetails}
-              />
-            </Switch>
-          </div>
-        </>
-      )}
+      {state.isLogin && <AuthPage />}
+      <Header />
+      <div className="page-container">
+        <Switch>
+          <Route exact path="/" component={HomePage} />
+          <Route exact path="/auth" component={HomePage} />
+          <Route exact path="/bill" component={BillPage} />
+          <Route exact path="/product-manager" component={ProductManager} />
+          <Route exact path="/product-update" component={ProductUpdateForm} />
+          <Route
+            exact
+            path="/product-details/:productId"
+            component={ProductDetails}
+          />
+        </Switch>
+      </div>
     </>
   );
 }

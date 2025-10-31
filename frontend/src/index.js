@@ -15,20 +15,10 @@ import "./access/fonts/fonts_css/fonts.css";
 
 // Component chính
 function App() {
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setLoading(false);
-    }, 1000);
-
-    return () => clearTimeout(timer);
-  }, []);
-
   return (
     <StoreProvider>
       <Router>
-        <MainContent loading={loading} />
+        <MainContent />
       </Router>
     </StoreProvider>
   );

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { LoaderPage } from "../base/LoaderForm.jsx";
 import { useParams } from "react-router-dom";
 import { useStore } from "../../store";
 import "./style.scss";
@@ -75,7 +76,12 @@ const ProductDetails = () => {
     }
   };
 
-  if (loading) return <div className="product-details">Đang tải...</div>;
+  if (loading)
+    return (
+      <div className="product-details">
+        <LoaderPage />
+      </div>
+    );
   if (error) return <div className="product-details error">{error}</div>;
   if (!product) return <div className="product-details">Chưa có sản phẩm</div>;
 
