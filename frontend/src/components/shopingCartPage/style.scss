@@ -1,0 +1,107 @@
+.cart-page {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+
+  h2 {
+    text-align: center;
+    color: var(--primary); /* Sử dụng màu chính từ biến */
+  }
+
+  .cart-items {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .cart-item {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    background-color: var(--bg-secondary); /* Sử dụng màu nền phụ từ biến */
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+    img {
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+
+    .item-details {
+      flex-grow: 1;
+      h3 {
+        font-size: 18px;
+        color: var(--text-primary); /* Sử dụng màu chữ chính từ biến */
+      }
+      p {
+        font-size: 16px;
+        color: var(--text-secondary); /* Sử dụng màu chữ phụ từ biến */
+        margin: 5px 0;
+      }
+
+      .quantity-controls {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+
+        button {
+          padding: 5px 10px;
+          background-color: var(--primary); /* Sử dụng màu chính từ biến */
+          border: none;
+          color: var(--text-light); /* Sử dụng màu chữ sáng từ biến */
+          cursor: pointer;
+          border-radius: 4px;
+
+          &:hover {
+            background-color: var(
+              --hover-primary
+            ); /* Sử dụng màu hover của chính từ biến */
+          }
+        }
+      }
+    }
+  }
+
+  .footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+    padding: 15px;
+    background-color: var(--bg-light); /* Sử dụng màu nền sáng từ biến */
+    border-radius: 8px;
+
+    p {
+      font-size: 16px;
+      color: var(--text-primary); /* Sử dụng màu chữ chính từ biến */
+    }
+
+    .order-button {
+      padding: 10px 20px;
+      background-color: var(--primary); /* Sử dụng màu chính từ biến */
+      border: none;
+      color: var(--text-light); /* Sử dụng màu chữ sáng từ biến */
+      font-size: 16px;
+      cursor: pointer;
+      border-radius: 8px;
+      transition: background-color 0.3s;
+
+      &:hover {
+        background-color: var(
+          --hover-primary
+        ); /* Sử dụng màu hover chính từ biến */
+      }
+
+      &:disabled {
+        background-color: var(
+          --gray-alpha-40
+        ); /* Màu xám nhẹ khi vô hiệu hóa */
+        cursor: not-allowed;
+      }
+    }
+  }
+}

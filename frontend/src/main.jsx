@@ -11,6 +11,8 @@ import BillPage from "./components/billPage";
 import ProductManager from "./components/uploadProductPage";
 import ProductUpdateForm from "./components/updateProductPage";
 import ProductDetails from "./components/productDetailsPage";
+import ShopingCartPage from "./components/shopingCartPage";
+// ---------------------------------------
 
 function MainContent() {
   const [state, dispatch] = useStore();
@@ -26,6 +28,7 @@ function MainContent() {
           <Route exact path="/bill" component={BillPage} />
           <Route exact path="/product-manager" component={ProductManager} />
           <Route exact path="/product-update" component={ProductUpdateForm} />
+          <Route exact path="/shoping-cart" component={ShopingCartPage} />
           <Route
             exact
             path="/product-details/:productId"
