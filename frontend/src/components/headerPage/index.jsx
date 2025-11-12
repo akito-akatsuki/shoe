@@ -4,6 +4,7 @@ import { useStore, actions } from "../../store";
 
 import logoImg from "./assets/logo/logo.png";
 import "./style.scss";
+import cartIcon from "./assets/icons/cart-icon.svg";
 
 export default function Header() {
   const [state, dispath] = useStore();
@@ -49,6 +50,7 @@ export default function Header() {
         if (!userRes.ok) return;
         const user = await userRes.json();
 
+        dispath(actions.set_access_token(data.accessToken));
         dispath(actions.set_user_info(user));
       } catch (err) {
         console.error("Auto login failed:", err);
@@ -77,12 +79,14 @@ export default function Header() {
   return (
     <div className="header">
       <div className="header-left">
-        <Link to="/"><img
+        <Link to="/">
+          <img
             src={logoImg}
             alt="Logo"
             className="logo-img"
             style={{ width: "3rem", height: "3rem" }}
-          /></Link>
+          />
+        </Link>
       </div>
       <div className="header-center">
         <input type="text" className="search-input" placeholder="Search..." />
@@ -114,6 +118,17 @@ export default function Header() {
       <div className="header-right">
         {state.userInfo.id ? (
           <>
+            <div className="cart">
+              <Link to="/shopping-cart" className="icon-btn">
+                <div
+                  style={{
+                    width: "2rem",
+                    height: "2rem",
+                    background: `url(${cartIcon}) center center / cover no-repeat`,
+                  }}
+                ></div>
+              </Link>
+            </div>
             <div
               className="user-info"
               style={{
@@ -141,7 +156,8 @@ export default function Header() {
                 <hr />
                 <div className="btn-actions">
                   <button className="btn logout" onClick={() => handleLogout()}>
-                    log out</button>
+                    log out
+                  </button>
                 </div>
               </div>
             )}

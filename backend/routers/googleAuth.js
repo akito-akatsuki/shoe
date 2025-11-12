@@ -174,7 +174,6 @@ router.get("/me", authenticate, async (req, res) => {
     if (!row.id) return res.status(404).json({ error: "User không tồn tại" });
     res.json(row);
   } catch (err) {
-    console.error("Lỗi truy vấn /auth/me:", err);
     res.status(500).json({ error: "Lỗi server" });
   }
 });

@@ -1,7 +1,7 @@
 import React, { useRef, useState, useEffect } from "react";
 import { LoaderPage } from "../base/LoaderForm.jsx";
 import { useHistory } from "react-router-dom";
-import { useStore } from "../../store";
+import { useStore, actions } from "../../store";
 
 import Banner from "./child/banner";
 import List from "./child/list";
@@ -13,22 +13,31 @@ export default function HomePage() {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  useEffect(async () => {
-    setLoading(true);
-    try {
-      const response = await fetch(`${state.domain}/products/product-list`);
-      if (!response.ok) {
-        throw new Error("Network response was not ok");
+  useEffect(() => {
+    const fetchProducts = async () => {
+      // Nếu allProducts rỗng hoặc undefined, bật loading
+      if (!state.allProducts || state.allProducts.length === 0)
+        setLoading(true);
+
+      try {
+        const response = await fetch(`${state.domain}/products/product-list`);
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        const result = await response.json();
+        dispatch(actions.set_all_products(result));
+      } catch (error) {
+        console.error("Error fetching product list:", error);
+        window.toast.error("Error fetching product list");
+      } finally {
+        // Chỉ tắt loading nếu trước đó đã bật
+        if (!state.allProducts || state.allProducts.length === 0)
+          setLoading(false);
       }
-      const result = await response.json();
-      console.log("Fetched product list:", result);
-      setData(result);
-    } catch (error) {
-      window.toast.error("Error fetching product list:", error);
-    } finally {
-      setLoading(false);
-    }
-  }, []);
+    };
+
+    fetchProducts();
+  }, [state.allProducts]);
 
   return (
     <>
@@ -36,8 +45,8 @@ export default function HomePage() {
         <LoaderPage />
       ) : (
         <div className="home-page">
-          {data &&
-            data.map((category) => (
+          {state.allProducts &&
+            state.allProducts.map((category) => (
               <div key={category.categoryId}>
                 <Banner
                   bannerUrl={`${state.domain}${encodeURI(category.bannerURL)}`}

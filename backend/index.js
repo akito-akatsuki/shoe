@@ -9,6 +9,11 @@ const fs = require("fs");
 // gọi file trong router
 const googleAuthRouter = require("./routers/googleAuth.js");
 const products = require("./routers/products.js");
+const shopingCard = require("./routers/shopingCard.js");
+
+// ====================
+// Cấu hình server
+// ====================
 
 const PORT = process.env.PORT || 5000;
 
@@ -26,6 +31,7 @@ app.use(
 
 app.use("/auth", googleAuthRouter);
 app.use("/products", products);
+app.use("/api", shopingCard);
 
 // --------- page ---------
 app.use(favicon(path.join(__dirname, "public", "favicon.ico")));

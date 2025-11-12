@@ -26,6 +26,7 @@
     "serve-favicon": "^2.5.1"
   },
   "_moduleAliases": {
+    "@authenticate": "routers/googleAuth",
     "@suid": "utils/suid",
     "@dateVN": "utils/dateVN",
     "@mySQLConfig": "utils/mySQLConfig"

@@ -28,7 +28,7 @@ function MainContent() {
           <Route exact path="/bill" component={BillPage} />
           <Route exact path="/product-manager" component={ProductManager} />
           <Route exact path="/product-update" component={ProductUpdateForm} />
-          <Route exact path="/shoping-cart" component={ShopingCartPage} />
+          <Route exact path="/shopping-cart" component={ShopingCartPage} />
           <Route
             exact
             path="/product-details/:productId"

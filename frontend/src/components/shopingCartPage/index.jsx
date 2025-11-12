@@ -1,35 +1,34 @@
 // src/components/CartPage.js
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useStore } from "../../store";
 import "./style.scss";
+
+import trashIcon from "./assets/icons/trash-icon.svg";
 
 const ShopingCartPage = () => {
   // Sample cart data
-  const [cartItems, setCartItems] = useState([
-    {
-      id: 1,
-      name: "Sản phẩm A",
-      price: 100000,
-      image: "https://via.placeholder.com/100",
-      quantity: 1,
-      selected: false,
-    },
-    {
-      id: 2,
-      name: "Sản phẩm B",
-      price: 200000,
-      image: "https://via.placeholder.com/100",
-      quantity: 1,
-      selected: false,
-    },
-    {
-      id: 3,
-      name: "Sản phẩm C",
-      price: 150000,
-      image: "https://via.placeholder.com/100",
-      quantity: 1,
-      selected: false,
-    },
-  ]);
+  const [state] = useStore();
+  const [cartItems, setCartItems] = useState([]);
+
+  useEffect(async () => {
+    if (!state.accessToken) return;
+    try {
+      const response = await fetch(`${state.domain}/api/shopping-cart`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${state.accessToken}`, // 👈 quan trọng
+        },
+        credentials: "include",
+      });
+      if (!response.ok) throw new Error("Failed to fetch cart items");
+      const data = await response.json();
+      setCartItems(data);
+    } catch (error) {
+      window.toast.error("Không thể tải giỏ hàng.");
+      console.error("Error fetching cart items:", error);
+    }
+  }, [state.accessToken]);
 
   // Handle change quantity
   const handleQuantityChange = (id, action) => {
@@ -71,6 +70,40 @@ const ShopingCartPage = () => {
 
   const { selectedCount, totalPrice } = calculateTotal();
 
+  // xóa item
+  const handleRemove = async (product_id) => {
+    try {
+      const response = await fetch(
+        `${state.domain}/api/shopping-cart/${product_id}`,
+        {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${state.accessToken}`, // gửi token
+          },
+          credentials: "include",
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Không thể xóa sản phẩm");
+      }
+
+      const data = await response.json();
+
+      if (data.success) {
+        // Cập nhật state để loại bỏ sản phẩm vừa xóa
+        setCartItems((prev) => prev.filter((item) => item.id !== product_id));
+        window.toast.success(data.message);
+      } else {
+        window.toast.error(data.message || "Xảy ra lỗi khi xóa sản phẩm");
+      }
+    } catch (error) {
+      console.error("Error removing cart item:", error);
+      window.toast.error("Không thể xóa sản phẩm, thử lại sau.");
+    }
+  };
+
   return (
     <div className="cart-page">
       <h2>Giỏ Hàng</h2>
@@ -82,7 +115,7 @@ const ShopingCartPage = () => {
               checked={item.selected}
               onChange={() => handleSelectItem(item.id)}
             />
-            <img src={item.image} alt={item.name} />
+            <img src={`${state.domain}${item.image}`} alt={item.name} />
             <div className="item-details">
               <h3>{item.name}</h3>
               <p>{item.price.toLocaleString()} VND</p>
@@ -99,6 +132,20 @@ const ShopingCartPage = () => {
                   +
                 </button>
               </div>
+            </div>
+            <div className="item-right">
+              <button
+                className="remove-button"
+                onClick={() => handleRemove(item.id)}
+              >
+                <div
+                  style={{
+                    width: "1.5rem",
+                    height: "1.5rem",
+                    background: `url(${trashIcon}) center center / cover no-repeat`,
+                  }}
+                ></div>
+              </button>
             </div>
           </div>
         ))}

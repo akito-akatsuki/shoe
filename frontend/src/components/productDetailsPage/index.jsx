@@ -90,6 +90,30 @@ const ProductDetails = () => {
       ? `${state.domain}${product.imageUrl[0]}`
       : "https://via.placeholder.com/480x360?text=No+Image";
 
+  // add to shopping cart
+
+  const handleAddToCart = async () => {
+    if (!product) return;
+    if (qty < 1) return alert("Số lượng phải lớn hơn 0");
+    try {
+      const res = await fetch(`${state.domain}/api/shopping-cart`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${state.accessToken}`, // 👈 quan trọng
+        },
+        body: JSON.stringify({ productId: product.id, quantity: qty }),
+      });
+      const json = await res.json();
+
+      if (!res.ok) throw new Error(json.error || "Lỗi thêm vào giỏ hàng");
+      window.toast.success("Đã thêm vào giỏ hàng!");
+    } catch (err) {
+      console.error(err);
+      window.toast.error("Thêm vào giỏ hàng thất bại. Vui lòng thử lại.");
+    }
+  };
+
   return (
     <div className="product-details">
       <div className="product-top">
@@ -148,12 +172,7 @@ const ProductDetails = () => {
                 {placing ? "Đang xử lý..." : "Đặt hàng ngay"}
               </button>
 
-              <button
-                className="btn btn-ghost"
-                onClick={() =>
-                  alert("Chức năng thêm giỏ hàng chưa triển khai.")
-                }
-              >
+              <button className="btn btn-ghost" onClick={handleAddToCart}>
                 Thêm vào giỏ
               </button>
             </div>
