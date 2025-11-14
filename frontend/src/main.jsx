@@ -25,7 +25,7 @@ function MainContent() {
         <Switch>
           <Route exact path="/" component={HomePage} />
           <Route exact path="/auth" component={HomePage} />
-          <Route exact path="/bill" component={BillPage} />
+          <Route exact path="/bill/:orderId" component={BillPage} />
           <Route exact path="/product-manager" component={ProductManager} />
           <Route exact path="/product-update" component={ProductUpdateForm} />
           <Route exact path="/shopping-cart" component={ShopingCartPage} />

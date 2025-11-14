@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
+import { useHistory } from "react-router-dom";
 import { LoaderPage } from "../base/LoaderForm.jsx";
 import { useParams } from "react-router-dom";
 import { useStore } from "../../store";
 import "./style.scss";
 
 const ProductDetails = () => {
+  const history = useHistory();
   const { productId } = useParams();
   const [state] = useStore();
   const [product, setProduct] = useState(null);
@@ -59,7 +61,7 @@ const ProductDetails = () => {
 
     try {
       setPlacing(true);
-      const res = await fetch(`${state.domain}/orders`, {
+      const res = await fetch(`${state.domain}/api/orders`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(orderPayload),
@@ -67,7 +69,7 @@ const ProductDetails = () => {
       const json = await res.json();
       if (!res.ok) throw new Error(json.error || "Lỗi đặt hàng");
       alert(`Đặt hàng thành công! Mã đơn: ${json.orderId || "—"}`);
-      setQty(1);
+      history.push(`/bill/${json.orderId}`);
     } catch (err) {
       console.error(err);
       alert("Đặt hàng thất bại. Vui lòng thử lại.");

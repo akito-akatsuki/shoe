@@ -1,9 +1,35 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import "./style.scss";
-
 import userIcon from "./assets/svg/user.svg";
+import { useStore } from "../../store";
 
 export default function BillPage() {
+  const [state] = useStore();
+  const { orderId } = useParams();
+  const [order, setOrder] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const loadOrder = async () => {
+      try {
+        console.log(orderId);
+        const res = await fetch(`${state.domain}/api/orders/${orderId}`);
+        const data = await res.json();
+        setOrder(data);
+      } catch (err) {
+        console.error(err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadOrder();
+  }, [orderId]);
+
+  if (loading) return <div>Đang tải hóa đơn...</div>;
+  if (!order) return <div>Không tìm thấy hóa đơn</div>;
+
   return (
     <div className="bill-container">
       <div className="invoice">
@@ -17,21 +43,18 @@ export default function BillPage() {
 
         <div className="content">
           <h2>HÓA ĐƠN THANH TOÁN</h2>
+
           <div className="customer-info">
-            <h3>Infomation:</h3>
+            <h3>Information:</h3>
             <p>
-              <img
-                src={userIcon}
-                alt="User"
-                style={{ width: "20px", height: "20px" }}
-              />{" "}
-              Name: Nguyễn Văn A
+              <img src={userIcon} style={{ width: 20 }} /> Name:{" "}
+              {order.customerName}
             </p>
-            <p>📞 Phone: +84 912 345 678</p>
-            <p>📍 Address: Số 13 Quang Trung, Thành phố Vinh, Nghệ An</p>
+            <p>📞 Phone: {order.customerPhone || "Chưa cung cấp"}</p>
+
             <div className="invoice-meta">
-              <p>Hóa đơn: #12345</p>
-              <p>Ngày: 06/01/2025</p>
+              <p>Hóa đơn: #{order.id}</p>
+              <p>Ngày: {order.created_at?.split("T")[0]}</p>
             </div>
           </div>
 
@@ -41,56 +64,41 @@ export default function BillPage() {
                 <th>Mục</th>
                 <th className="center">Số lượng</th>
                 <th className="center">Đơn giá</th>
-                <th className="center">Giảm giá</th>
                 <th className="center">Thành tiền</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td>Sửa giày sneaker</td>
-                <td className="center">1</td>
-                <td className="center">2.000.000đ</td>
-                <td className="center">2%</td>
-                <td className="center">2.000.000đ</td>
-              </tr>
-              <tr>
-                <td>Vệ sinh giày sneaker</td>
-                <td className="center">2</td>
-                <td className="center">2.000.000đ</td>
-                <td className="center">2%</td>
-                <td className="center">4.000.000đ</td>
-              </tr>
-              <tr>
-                <td>Chống nước cho giày sneaker</td>
-                <td className="center">1</td>
-                <td className="center">2.000.000đ</td>
-                <td className="center">2%</td>
-                <td className="center">2.000.000đ</td>
+                <td>{order.productName}</td>
+                <td className="center">{order.quantity}</td>
+                <td className="center">
+                  {Number(order.unitPrice).toLocaleString("vi-VN")} đ
+                </td>
+                <td className="center">
+                  {Number(order.total).toLocaleString("vi-VN")} đ
+                </td>
               </tr>
             </tbody>
           </table>
 
           <div className="total">
-            <p>Tổng cộng: 8.000.000đ</p>
-            <p>Thuế (0%): 0đ</p>
             <p>
-              <strong>Tổng tiền: 8.000.000đ</strong>
+              <strong>
+                Tổng tiền: {Number(order.total).toLocaleString()} đ
+              </strong>
             </p>
           </div>
 
           <div className="payment-info">
             <h3>Thông tin Thanh toán</h3>
-            <p>Ngân hàng:</p>
+            <p>Ngân hàng: Vietcombank</p>
             <p>Tên tài khoản: Giày</p>
             <p>Số tài khoản: 00001012456</p>
-            <p>Hạn thanh toán: 06/01/2025</p>
           </div>
         </div>
 
         <div className="footer">
-          ✉️ <span className="highlight">xinchao@trangwebhay.vn</span> | 📍 123
-          Đường ABC, Thành phố DEF | ☎️{" "}
-          <span className="highlight">+84 912 345 678</span>
+          ✉️ <span className="highlight">xinchao@trangwebhay.vn</span>
         </div>
       </div>
     </div>

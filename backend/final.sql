@@ -13,38 +13,57 @@ CREATE TABLE `users` (
  PRIMARY KEY (`id`),
  UNIQUE KEY `email` (`email`),
  UNIQUE KEY `mention` (`mention`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci
 
-CREATE TABLE category (
-  id VARCHAR(11) PRIMARY KEY,
-  categoryName VARCHAR(255),
-  description TEXT
-);
-
-CREATE TABLE products (
-  id VARCHAR(11) PRIMARY KEY,
-  productName VARCHAR(255),
-  description TEXT,
-  categoryId VARCHAR(11),
-  stock INT,
-  price DECIMAL(10,2),
-  restockDate DATE,
-  FOREIGN KEY (categoryId) REFERENCES category(id)
-);
-
-CREATE TABLE shopping_cart (
-  id VARCHAR(11) PRIMARY KEY,
-  product_id VARCHAR(11),
-  user_id VARCHAR(11),
-  quantity INT,
-  FOREIGN KEY (product_id) REFERENCES products(id),
-  FOREIGN KEY (user_id) REFERENCES users(id)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+CREATE TABLE `category` (
+ `id` varchar(11) NOT NULL,
+ `categoryName` varchar(255) DEFAULT NULL,
+ `description` text DEFAULT NULL,
+ PRIMARY KEY (`id`),
+ UNIQUE KEY `unique_category_name` (`categoryName`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci
 
 
+CREATE TABLE `products` (
+ `id` varchar(11) NOT NULL,
+ `productName` varchar(255) DEFAULT NULL,
+ `description` text DEFAULT NULL,
+ `categoryId` varchar(11) DEFAULT NULL,
+ `stock` int(11) DEFAULT NULL,
+ `price` decimal(10,2) DEFAULT NULL,
+ `restockDate` date DEFAULT NULL,
+ PRIMARY KEY (`id`),
+ KEY `categoryId` (`categoryId`),
+ CONSTRAINT `products_ibfk_1` FOREIGN KEY (`categoryId`) REFERENCES `category` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci
 
-INSERT INTO category (id, categoryName, description) VALUES
-('C001', 'Giày thể thao', 'Các loại giày dùng cho hoạt động thể thao thông thường.'),
-('C002', 'Sneaker', 'Giày thời trang phong cách trẻ trung, năng động.'),
-('C003', 'Giày bóng rổ', 'Giày chuyên dụng cho người chơi bóng rổ.'),
-('C004', 'Phụ kiện', 'Phụ kiện kèm theo như dây giày, lót giày, vớ, v.v.');
+CREATE TABLE `shopping_cart` (
+ `id` varchar(11) NOT NULL,
+ `product_id` varchar(11) DEFAULT NULL,
+ `user_id` varchar(11) DEFAULT NULL,
+ `quantity` int(11) DEFAULT NULL,
+ `added_at` datetime DEFAULT NULL,
+ PRIMARY KEY (`id`),
+ UNIQUE KEY `unique_user_product` (`user_id`,`product_id`),
+ KEY `product_id` (`product_id`),
+ CONSTRAINT `shopping_cart_ibfk_1` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`),
+ CONSTRAINT `shopping_cart_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci
+
+CREATE TABLE `orders` (
+  `id` varchar(11) NOT NULL,
+  `customerName` varchar(255),
+  `customerPhone` varchar(50),
+  `productId` varchar(11),
+  `quantity` int,
+  `unitPrice` decimal(10,2),
+  `total` decimal(10,2),
+  `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+SHOW CREATE TABLE users;
+SHOW CREATE TABLE shopping_cart;
+SHOW CREATE TABLE products;
+SHOW CREATE TABLE category;

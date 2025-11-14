@@ -6,11 +6,6 @@ const cors = require("cors");
 const path = require("path");
 const fs = require("fs");
 
-// gọi file trong router
-const googleAuthRouter = require("./routers/googleAuth.js");
-const products = require("./routers/products.js");
-const shopingCard = require("./routers/shopingCard.js");
-
 // ====================
 // Cấu hình server
 // ====================
@@ -29,9 +24,16 @@ app.use(
 
 // --------- routers ---------
 
+// gọi file trong router
+const googleAuthRouter = require("./routers/googleAuth.js");
+const products = require("./routers/products.js");
+const shopingCard = require("./routers/shopingCard.js");
+const order = require("./routers/orders.js");
+
 app.use("/auth", googleAuthRouter);
 app.use("/products", products);
 app.use("/api", shopingCard);
+app.use("/api", order);
 
 // --------- page ---------
 app.use(favicon(path.join(__dirname, "public", "favicon.ico")));
